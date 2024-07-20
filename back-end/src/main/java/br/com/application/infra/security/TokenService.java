@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.*;
 
 @Service
 @RequiredArgsConstructor
@@ -21,8 +19,8 @@ public class TokenService {
 
     private final UserRepository userRepository;
 
-    @Value("${api.security.token.secret}")
-    private String SECRET_KEY;
+    //@Value("${api.security.token.secret}")
+    private String SECRET_KEY = "ola";
 
     public String generateToken(User user) {
         try {
@@ -42,11 +40,14 @@ public class TokenService {
     public String validateToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
-            return JWT.require(algorithm)
+            String subject = JWT.require(algorithm)
                     .withIssuer("login-auth-api")
                     .build()
                     .verify(token)
                     .getSubject();
+
+            return subject;
+
         } catch (JWTVerificationException exception) {
             throw new BusinessException("Invalid or expired JWT token.");
         }
@@ -63,13 +64,29 @@ public class TokenService {
 
             return generateToken(userRepository.findByEmail(email));
         } catch (JWTVerificationException exception) {
-            //logger.error("Invalid or expired JWT token", exception);
+            throw new BusinessException("Invalid or expired JWT token.");
+        }
+    }
+
+    public Instant getExpirationDate(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
+
+            Instant expirationDate = JWT.require(algorithm)
+                    .withIssuer("login-auth-api")
+                    .build()
+                    .verify(token)
+                    .getExpiresAt()
+                    .toInstant();
+
+            return expirationDate;
+        } catch (JWTVerificationException exception) {
             throw new BusinessException("Invalid or expired JWT token.");
         }
     }
 
     private Instant generateExpirationDate() {
-        return LocalDateTime.now().plusMinutes(4).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now(ZoneOffset.UTC).plusMinutes(30).toInstant(ZoneOffset.UTC);
     }
 
 }

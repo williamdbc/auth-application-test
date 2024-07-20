@@ -1,0 +1,64 @@
+.login-wrapper {
+  margin: 0;
+  padding: 0;
+  background-color: #20293c;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  background-color: #ffffff; /* Fundo branco para contraste */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #333333; /* Cor de texto escura para contraste */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #333333; /* Cor de texto escura para contraste */
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaçamento maior entre os elementos do formulário */
+  width: 300px;
+  padding: 20px;
+
+  border-radius: 8px;
+
+}
+
+.login-form input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #cccccc; /* Bordas cinza para contraste */
+  background-color: #ffffff; /* Fundo branco para inputs */
+  color: #333333; /* Cor de texto escura para contraste */
+}
+
+.login-form input::placeholder {
+  color: #999999; /* Cor de placeholder mais suave */
+}
+
+.login-form button {
+  padding: 10px 20px; /* Mais espaçamento interno no botão */
+  border-radius: 5px;
+  border: none;
+  background-color: #5885da; /* Azul para o botão */
+  color: #ffffff; /* Texto branco para o botão */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+  background-color: #007acc; /* Tom mais escuro de azul ao passar o mouse */
+}

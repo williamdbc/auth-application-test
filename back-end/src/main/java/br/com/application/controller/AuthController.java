@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -28,6 +30,13 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDTO data) {
         authService.register(data);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/validate-token")
+    public ResponseEntity<?> validateToken(@RequestBody Map<String, String> request) {
+        String token = request.get("token");
+        authService.validateToken(token);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

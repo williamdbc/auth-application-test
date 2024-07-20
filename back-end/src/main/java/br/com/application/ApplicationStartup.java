@@ -2,9 +2,12 @@ package br.com.application;
 
 import br.com.application.dto.RegisterDTO;
 import br.com.application.service.AuthService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.TimeZone;
 
 @Component
 public class ApplicationStartup implements CommandLineRunner {
@@ -21,4 +24,5 @@ public class ApplicationStartup implements CommandLineRunner {
 
         authService.register(data);
     }
+
 }

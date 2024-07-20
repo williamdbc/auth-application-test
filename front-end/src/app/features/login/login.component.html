@@ -1,0 +1,10 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <h2>Login</h2>
+    <form class="login-form" (ngSubmit)="onLogin()">
+      <input pInputText type="email" placeholder="Email" [(ngModel)]="loginData.email" name="email" required />
+      <input pInputText placeholder="Password" type="password" [(ngModel)]="loginData.password" name="password" required />
+      <button pButton type="submit" label="Login"></button>
+    </form>
+  </div>
+</div>

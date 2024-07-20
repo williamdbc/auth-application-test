@@ -8,6 +8,8 @@ import br.com.application.exception.BusinessException;
 import br.com.application.repository.UserRepository;
 import br.com.application.infra.security.TokenService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +51,10 @@ public class AuthService {
         user.setEmail(data.getEmail());
         user.setPassword(passwordEncoder.encode(data.getPassword()));
         userRepository.save(user);
+    }
+
+    public void validateToken(String token){
+        tokenService.validateToken(token);
     }
 
 }
