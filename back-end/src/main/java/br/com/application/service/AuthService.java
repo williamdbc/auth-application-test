@@ -4,6 +4,7 @@ import br.com.application.dto.AuthDTO;
 import br.com.application.dto.LoginDTO;
 import br.com.application.dto.RegisterDTO;
 import br.com.application.entity.User;
+import br.com.application.enums.UserRole;
 import br.com.application.exception.BusinessException;
 import br.com.application.repository.UserRepository;
 import br.com.application.infra.security.TokenService;
@@ -50,6 +51,7 @@ public class AuthService {
         user.setName(data.getName());
         user.setEmail(data.getEmail());
         user.setPassword(passwordEncoder.encode(data.getPassword()));
+        user.setRole(data.getRole() == null ? UserRole.USER : data.getRole());
         userRepository.save(user);
     }
 

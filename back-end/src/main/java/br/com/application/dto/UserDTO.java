@@ -4,11 +4,10 @@ import br.com.application.enums.UserRole;
 import lombok.Data;
 
 @Data
-public class RegisterDTO {
+public class UserDTO {
 
     private String name;
     private String email;
-    private String password;
     private UserRole role;
 
 }

@@ -1,6 +1,8 @@
 package br.com.application;
 
+import br.com.application.controller.UserController;
 import br.com.application.dto.RegisterDTO;
+import br.com.application.enums.UserRole;
 import br.com.application.service.AuthService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,20 @@ public class ApplicationStartup implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        RegisterDTO data = new RegisterDTO();
-        data.setName("admin");
-        data.setEmail("admin@example.com");
-        data.setPassword("admin123");
+        RegisterDTO data1 = new RegisterDTO();
+        data1.setName("Administrador");
+        data1.setEmail("admin");
+        data1.setPassword("admin");
+        data1.setRole(UserRole.ADMIN);
 
-        authService.register(data);
+        RegisterDTO data2 = new RegisterDTO();
+        data2.setName("Usuario comum");
+        data2.setEmail("user");
+        data2.setPassword("user");
+        data2.setRole(UserRole.USER);
+
+        authService.register(data1);
+
     }
 
 }
